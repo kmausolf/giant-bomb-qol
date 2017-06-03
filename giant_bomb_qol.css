@@ -81,6 +81,18 @@ Previous & Next Videos
 }
 
 /*************************************************
+Video Quick Nav
+*************************************************/
+
+.qol-quicknav-rw {
+  display: inline-block;
+  float: left;
+  margin-left: 16px;
+  padding: 7px;
+  position: relative;
+}
+
+/*************************************************
 Hide Spoiler Elements
 *************************************************/
 

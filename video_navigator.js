@@ -1,5 +1,15 @@
 console.log("giant-bomb-qol loading");
 
+$(document).ready(function() {
+  $(".av-controls--left").on("click", "#qol_quicknav_rw", function() {
+    $(".js-event-tracking.js-vid-buffer.av-buffer-wrap").click();
+  });
+
+  $(".js-event-tracking.js-vid-buffer.av-buffer-wrap").click(function() {
+    alert("wowee");
+  });
+});
+
 if (navigator.userAgent.indexOf("Chrome") != -1) {
   chrome.storage.sync.get(["api_key","prev_next_vids", "hide_titr_spoilers"], handleOptions);
 } else {
@@ -31,10 +41,28 @@ function handleOptions(items) {
 
     showPrevAndNexVids(api_key, blackOrWhite, hide_titr);
   }
+
+  showVideoQuickNav();
 }
 
 function onError(error) {
   console.log(`Error: ${error}`);
+}
+
+function showVideoQuickNav() {
+  let html = [
+    "<a id='qol_quicknav_rw' rel='nofollow'>",
+    "<img src='",
+    chrome.extension.getURL("img/emotes/hardcore.png") + "'/>",
+    "</a>"
+  ].join("");
+
+  let div = document.createElement("div");
+  div.setAttribute("class", "qol-quicknav-rw");
+  div.innerHTML = html;
+
+  let adjElem = document.getElementsByClassName("av-chrome-control av-chrome-status")[0];
+  adjElem.insertAdjacentElement("beforeBegin", div);
 }
 
 function showPrevAndNexVids(api_key, blackOrWhite, hide_titr) {
